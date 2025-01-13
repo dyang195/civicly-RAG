@@ -6,9 +6,7 @@ from google.auth.credentials import AnonymousCredentials
 from google.cloud.firestore import Client
 from datetime import datetime
 from typing import List, Dict
-import numpy as np
 from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
 import datetime
 import chromadb
 from chromadb.config import Settings

@@ -1,0 +1,8 @@
+fastapi
+uvicorn # for running locally
+python-dotenv
+pinecone-client
+openai
+redis
+pydantic
+sentence-transformers
