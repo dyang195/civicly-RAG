@@ -28,13 +28,13 @@ class SearchService:
             enhanced_query,
             limit=search_query.limit
         )
-        
+        print(results)
         # Format results
         search_results = [
             SearchResult(
-                text=result.text,
-                meeting_date=result.metadata["meeting_date"],
-                meeting_title=result.metadata["meeting_title"],
+                text=result.metadata["text"],
+                meeting_date= result.metadata["session_date"],
+                meeting_title= "title1", # result.metadata["meeting_title"],
                 speaker=result.metadata["speaker"],
                 relevance_score=result.score,
                 start_time=result.metadata["start_time"],
@@ -56,11 +56,11 @@ class SearchService:
             return cached.decode()
 
         try:
-            completion = await openai.chat.completions.create(
+            completion = openai.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "Enhance this search query for searching city council transcripts."},
-                    {"role": "user", "content": query}
+                    {"role": "user", "content": f"Query: {query}"}
                 ]
             )
             enhanced = completion.choices[0].message.content

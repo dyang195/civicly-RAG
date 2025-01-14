@@ -10,11 +10,8 @@ from config import settings
 
 class VectorStore:
     def __init__(self):
-        pinecone.init(
-            api_key=settings.PINECONE_API_KEY,
-            environment=settings.PINECONE_ENVIRONMENT
-        )
-        self.index = pinecone.Index("council-transcripts")
+        _pc = pinecone.Pinecone(api_key=settings.PINECONE_API_KEY)
+        self.index = _pc.Index("council-transcripts")
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
 
 
@@ -26,7 +23,8 @@ class VectorStore:
         query_vector = self._text_to_vector(query)
         
         results = self.index.query(
-            vectore=query_vector,
+            namespace="seattle",
+            vector=query_vector,
             top_k=limit,
             include_metadata=True
         )

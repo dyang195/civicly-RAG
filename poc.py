@@ -56,11 +56,13 @@ def print_transcript(transcript: Transcript) -> None:
         
         print("-" * 80)
 
+print("connecting to database...")
 # Connect to the database
 fireo.connection(client=Client(
     project="cdp-seattle-21723dcf",
     credentials=AnonymousCredentials()
 ))
+print("Connected to database.")
 
 # Read from the database
 # five_people = list(db_models.Person.collection.fetch(100))
@@ -104,10 +106,15 @@ class TranscriptRAG:
         # Initialize sentence transformer model
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
         # Initialize ChromaDB
+        print("Initializing chromadb...")
         self.chroma_client = chromadb.Client(Settings(
             persist_directory="./transcript_db"
         ))
+        print("Chromadb initialized.")
+
+        print("Creating Collection...")
         self.collection = self.chroma_client.create_collection(name="transcripts")
+        print("Collection created.")
 
     def process_transcript(self, transcript: Transcript) -> List[TranscriptChunk]:
         """Process a transcript into chunks with metadata"""
@@ -196,23 +203,24 @@ class TranscriptRAG:
 
     def concept_based_search(self, concept_query: str) -> List[Dict]:
         """
-        Enhanced search that understands high-level concepts
-        Example: "meetings useful to a 24 yr old in tech"
+        Enhanced search that understands high-level concepts related to climate change
+        Example: "sustainability initiatives in urban areas"
         """
-        # You could enhance this with additional context and rules
-        tech_keywords = [
-            "technology", "software", "digital", "innovation", "startup",
-            "development", "programming", "infrastructure", "data",
-            "applications", "platforms", "systems"
+        climate_keywords = [
+            "climate change", "global warming", "greenhouse gases", "carbon emissions",
+            "renewable energy", "sustainability", "environmental impact",
+            "carbon footprint", "climate action", "clean energy", "fossil fuels",
+            "sea level rise", "extreme weather", "biodiversity", "deforestation",
+            "climate mitigation", "adaptation", "climate resilience", "net zero",
+            "decarbonization"
         ]
         
-        # Expand the original query with relevant context
         expanded_query = f"""
         {concept_query}
-        Context: Looking for discussions about {', '.join(tech_keywords)},
-        city development affecting young professionals,
-        innovation initiatives, startup support,
-        tech industry growth, digital infrastructure
+        Context: Looking for discussions about {', '.join(climate_keywords)},
+        environmental policies, climate solutions,
+        sustainability initiatives, ecological impacts,
+        climate science, environmental conservation
         """
         
         return self.semantic_search(expanded_query, n_results=5)
@@ -229,10 +237,12 @@ def main():
     #         transcript = Transcript.from_json(f.read())
     #         rag.index_transcript(transcript)
 
+    print("connecting to file system...")
     fs = GCSFileSystem(project="cdp-seattle-21723dcf", token="anon")
+    print("Connected to file system.")
 
     # Read a transcript's details from the database
-    transcript_models = list(db_models.Transcript.collection.fetch(100))
+    transcript_models = list(db_models.Transcript.collection.fetch(2))
     
     ids = [(transcript_model.session_ref.get().event_ref.get().id, transcript_model.session_ref.get().event_ref.get().body_ref.get().name) for transcript_model in transcript_models]
     print(ids)
@@ -241,10 +251,11 @@ def main():
         # Read the transcript directly from the file store
         with fs.open(transcript_model.file_ref.get().uri, "r") as open_resource:
             transcript = Transcript.from_json(open_resource.read())
+            rag.generate_summary(transcript)
             rag.index_transcript(transcript)
 
     # Example searches
-    concept_query = "meetings useful to a 24 yr old in tech"
+    concept_query = "meetings about climate change"
     results = rag.concept_based_search(concept_query)
     
     print(f"\nSearch Results for: {concept_query}")
