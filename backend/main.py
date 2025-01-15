@@ -14,8 +14,12 @@ app = FastAPI(title=settings.PROJECT_NAME)
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=[
+        "http://localhost:3000",
+        "https://www.civicly.ai",
+        "https://civicly-ai.vercel.app"
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )

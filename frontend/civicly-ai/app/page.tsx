@@ -38,8 +38,10 @@ export default function Home() {
       if (endDate) {
         payload.end_date = endDate
       }
-  
-      const response = await fetch('http://localhost:8000/search', {
+
+      const API_URL = process.env.BACKEND_API_URL || 'http://localhost:8000'
+
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
