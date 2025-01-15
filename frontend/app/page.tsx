@@ -66,16 +66,9 @@ export default function Home() {
     }
   }
 
-  const resetPage = useCallback(() => {
-    setSearchPerformed(false)
-    setSearchResults(null)
-    setIsLoading(false)
-    setError(null)
-  }, [])
-
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header onReset={resetPage} isLoading={isLoading} />
+      <Header/>
       <main className="p-4">
         <motion.div
           initial={{ y: searchPerformed ? -50 : 0 }}
