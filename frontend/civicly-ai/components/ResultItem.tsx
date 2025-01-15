@@ -30,7 +30,7 @@ export default function ResultItem({ result }: ResultItemProps) {
         <CardContent>
           <p className="text-gray-700">
             <span className="text-gray-400">...</span>
-            "{result.text}"
+            &ldquo;{result.text}&rdquo;
             <span className="text-gray-400">...</span>
           </p>
         </CardContent>

@@ -22,7 +22,12 @@ export default function Home() {
     setSearchResults(null)
 
     try {
-      const payload: any = {
+      const payload: {
+        query: string;
+        limit: number;
+        start_date?: string;
+        end_date?: string;
+      } = {
         query,
         limit: 10
       }
