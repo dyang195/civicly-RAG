@@ -49,7 +49,7 @@ export default function Header() {
                 width={20}
                 height={20}
               />
-              <span className="text-gray-700">Buy me a coffee</span>
+              <span className="text-gray-700 hidden sm:inline">Buy me a coffee</span>
             </Link>
           </div>
         </div>

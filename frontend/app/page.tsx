@@ -79,7 +79,7 @@ export default function Home() {
             <div className="text-center space-y-4">
               <h1 className="text-5xl text-gray-900">Know your city</h1>
               <h2 className="text-3xl text-gray-700">Engage with your community</h2>
-              <p className="text-2xl text-gray-600 inline-flex items-center justify-center gap-2 whitespace-nowrap">
+              <p className="text-2xl text-gray-600 flex flex-wrap items-center justify-center gap-2">
                 Search
                 <Select value={selectedCity} onValueChange={setSelectedCity}>
                   <SelectTrigger className="mx-2 w-[120px] h-auto py-0.5 px-2 text-2xl text-gray-600 bg-transparent hover:bg-transparent focus:ring-0 inline-flex items-center border border-gray-200 rounded-md [&>svg]:ml-1 [&>svg]:border-l [&>svg]:border-gray-200 [&>svg]:pl-1">
