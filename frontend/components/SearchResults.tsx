@@ -23,6 +23,7 @@ export default function SearchResults({ results, totalResults }: SearchResultsPr
 
   return (
     <div className="space-y-6">
+      <h2 className="text-2xl font-semibold">Relevant Records</h2>
       <div className="space-y-3">
         {displayedResults.map((result) => (
           <ResultItem key={result.event_id} result={result} />

@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import SearchResults from '../components/SearchResults'
 import LoadingDots from '../components/LoadingDots'
+import SummaryResult from '../components/SummaryResult'
 import { SearchResponse } from './types'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
@@ -115,13 +116,14 @@ export default function Home() {
             <p>{error}</p>
           </div>
         )}
-        {searchResults && (
+        {searchResults && !isLoading && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-6 max-w-3xl mx-auto"
+            className="mt-8 max-w-3xl mx-auto space-y-10"
           >
+            <SummaryResult summary={searchResults.summary} />
             <SearchResults results={searchResults.results} totalResults={searchResults.total_results} />
           </motion.div>
         )}

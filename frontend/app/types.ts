@@ -13,6 +13,7 @@ export interface SearchResponse {
   results: SearchResult[]
   total_results: number
   processing_time: number
+  summary: string
 }
 
 export type City = "seattle" | "coming-soon"

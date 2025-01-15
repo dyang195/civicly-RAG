@@ -26,3 +26,4 @@ class SearchResponse(BaseModel):
     results: List[SearchResult]
     total_results: int
     processing_time: float
+    summary: str
