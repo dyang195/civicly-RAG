@@ -5,4 +5,5 @@ pinecone-client
 openai
 redis
 pydantic
+pydantic-settings
 sentence-transformers
