@@ -13,7 +13,7 @@
 
 ### Frontend Architecture
 
-- **Framework**: Next.js (Node.js)- 
+- **Framework**: Next.js (Node.js)
 - **Hosting**: Vercel
 - **UI**: React
 
@@ -21,10 +21,10 @@
 
 - **Framework**: FastAPI
 - **Hosting**: Railway.app
-- **Vector Database**: Pinecone vector database with sentence-transformers
-- **LLM Provider**: OpenAI GPT-4o-mini for query enhancement and summarization
-- **Caching**: Redis for performance optimization
-- **Vector Embeddings**: MiniLM-L6-v2 model for semantic search embeddings
+- **Vector Database**: Pinecone.io
+- **LLM Provider**: OpenAI GPT-4o-mini
+- **Caching**: Redis
+- **Vector Embeddings**: MiniLM-L6-v2
 
 ## Development
 
