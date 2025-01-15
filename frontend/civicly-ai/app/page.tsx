@@ -39,7 +39,7 @@ export default function Home() {
         payload.end_date = endDate
       }
 
-      const API_URL = process.env.BACKEND_API_URL || 'http://localhost:8000'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
       const response = await fetch(API_URL, {
         method: 'POST',
