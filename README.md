@@ -23,10 +23,12 @@
 - **Hosting**: Railway.app
 - **Vector Database**: Pinecone.io
 - **LLM Provider**: OpenAI GPT-4o-mini
-- **Caching**: Redis
+- **Data Source**: Council Data Project
 - **Vector Embeddings**: MiniLM-L6-v2
 
-## Development
+## Get Started
+
+### Backend Development
 
 The project uses FastAPI for the backend with several key components:
 
@@ -35,12 +37,7 @@ The project uses FastAPI for the backend with several key components:
 - `Models`: Pydantic models for type-safe data handling
 - `Config`: Environment and settings management
 
-Testing can be run using the included test script:
-```bash
-python test_script.py
-```
-
-### Installation
+#### Backend Installation
 
 1. Clone the repository:
 ```bash
@@ -65,12 +62,51 @@ cp .env.example .env
 uvicorn main:app --reload
 ```
 
-### Environment Variables
+#### Backend Environment Variables
 
 ```
 OPENAI_API_KEY=your_openai_key
 PINECONE_API_KEY=your_pinecone_key
 REDIS_URL=redis://localhost:6379
+```
+
+### Frontend Development
+
+The frontend is built with Next.js and React, providing a modern and responsive user interface.
+
+#### Frontend Installation
+
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+# Edit .env.local with your API endpoints and keys
+```
+
+4. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+The frontend will be available at `http://localhost:3000`.
+
+#### Frontend Environment Variables
+
+```
+NEXT_PUBLIC_API_URL=your_backend_url
 ```
 
 ## Contributing
