@@ -12,16 +12,16 @@ async def test_search():
     service = SearchService()
     
     # Test basic search
-    query = SearchQuery(query="bike lanes in downtown")
+    query = SearchQuery(query="sustainability efforts")
     results = await service.search(query)
     print("\n=== Basic Search Results ===")
     for i, result in enumerate(results.results, 1):
         print(f"\nResult {i}: {result}")
-        # print(f"Text: {result.text[:200]}...")
-        # print(f"Meeting: {result.meeting_title}")
-        # print(f"Date: {result.meeting_date}")
-        # print(f"Speaker: {result.speaker}")
-        # print(f"Score: {result.relevance_score}")
+        print(f"Text: {result.text[:200]}...")
+        print(f"Meeting: {result.meeting_title}")
+        print(f"Date: {result.meeting_date}")
+        print(f"Speaker: {result.speaker}")
+        print(f"Score: {result.relevance_score}")
 
 async def test_query_enhancement():
     """Test GPT query enhancement"""

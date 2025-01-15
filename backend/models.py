@@ -13,6 +13,7 @@ class SearchQuery(BaseModel):
     limit: Optional[int] = 10
 
 class SearchResult(BaseModel):
+    event_id: str
     text: str
     meeting_date: datetime
     meeting_title: str
