@@ -67,17 +67,28 @@ class TranscriptIndexer:
         current_chunk = []
         current_length = 0
         
+        # Create base metadata from transcript-level annotations
+        base_metadata = {}
+        if hasattr(transcript, 'annotations'):
+            for key, value in transcript.annotations.__dict__.items():
+                if value is not None:
+                    base_metadata[f"annotation_{key}"] = str(value)
+        
         for sentence in transcript.sentences:
-            metadata = {
+            # Start with the base metadata from transcript
+            metadata = base_metadata.copy()
+
+            # Add sentence-specific metadata
+            metadata.update({
                 'start_time': str(sentence.start_time),
                 'end_time': str(sentence.end_time),
                 'speaker': sentence.speaker_name or f"Speaker {sentence.speaker_index}" if sentence.speaker_index else "Unknown",
                 'confidence': float(sentence.confidence),
                 'session_date': transcript.session_datetime,
                 'generator': transcript.generator
-            }
+            })
             
-            # Add custom annotations
+            # Add sentence-level annotations if they exist
             if sentence.annotations:
                 for key, value in sentence.annotations.__dict__.items():
                     if value is not None:
@@ -94,6 +105,7 @@ class TranscriptIndexer:
             current_chunk.append(sentence.text)
             current_length += len(sentence.text)
         
+        print(metadata)
         if current_chunk:
             chunks.append(TranscriptChunk(
                 text=' '.join(current_chunk),
@@ -150,7 +162,7 @@ class TranscriptIndexer:
                     # Add additional metadata to transcript
                     transcript.annotations = transcript.annotations or type('obj', (), {})()
                     transcript.annotations.event_id = event.id
-                    transcript.annotations.body_name = body.name
+                    transcript.annotations.meeting_name = body.name
                     
                     # Index the transcript
                     self.index_transcript(transcript, namespace=namespace)
@@ -162,10 +174,10 @@ class TranscriptIndexer:
 def main():
     # Initialize indexer
     indexer = TranscriptIndexer()
-    
+
     # Index transcripts
     indexer.index_multiple_transcripts(
-        limit=10,  # Adjust limit as needed
+        limit=2000,  # Adjust limit as needed
         namespace="seattle"  # You can organize by city/region
     )
     
