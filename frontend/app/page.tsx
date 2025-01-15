@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import SearchResults from '../components/SearchResults'
+import LoadingDots from '../components/LoadingDots'
 import { SearchResponse } from './types'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
@@ -39,7 +40,7 @@ export default function Home() {
         payload.end_date = endDate
       }
 
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/search'
 
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -98,9 +99,16 @@ export default function Home() {
           <SearchBox onSearch={handleSearch} />
         </motion.div>
         {isLoading && (
-          <div className="mt-6 text-center">
-            <p>Loading results...</p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mt-6 text-center"
+          >
+            <p className="text-xl text-gray-600">
+              Searching through records<LoadingDots />
+            </p>
+          </motion.div>
         )}
         {error && (
           <div className="mt-6 text-center text-red-500">
