@@ -1,6 +1,6 @@
 # Civicly.ai
 
-A Visual Studio Code extension that provides AI-powered search and summarization for city council records, making local government more accessible and understandable. The platform uses semantic search and AI summarization to help citizens easily find and comprehend information from city council meetings.
+[Civicly.ai](civicly.ai) is a website that provides AI-powered search and summarization for city council records, making local government more accessible and understandable. The web application uses semantic search and AI summarization to help citizens easily find and comprehend information from city council meetings.
 
 ## Features
 
