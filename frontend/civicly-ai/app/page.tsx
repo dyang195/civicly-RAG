@@ -6,19 +6,21 @@ import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import SearchResults from '../components/SearchResults'
 import { SearchResponse } from './types'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function Home() {
   const [searchPerformed, setSearchPerformed] = useState(false)
   const [searchResults, setSearchResults] = useState<SearchResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [selectedCity, setSelectedCity] = useState("seattle")
 
   const handleSearch = async (query: string, startDate: string, endDate: string) => {
     setSearchPerformed(true)
     setIsLoading(true)
     setError(null)
     setSearchResults(null)
-    
+
     try {
       const payload: any = {
         query,
@@ -61,14 +63,30 @@ export default function Home() {
       <main className="p-4">
         <motion.div
           initial={{ y: searchPerformed ? -50 : 0 }}
-          animate={{ y: searchPerformed ? 0 : '35vh' }}
+          animate={{ y: searchPerformed ? 0 : '20vh' }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto space-y-3"
+          className="max-w-3xl mx-auto space-y-6"
         >
           {!searchPerformed && (
-            <p className="text-gray-600 text-center">
-              Search Seattle City Council meeting transcripts by typing your query below
-            </p>
+            <div className="text-center space-y-4">
+              <h1 className="text-5xl text-gray-900">Know your city</h1>
+              <h2 className="text-3xl text-gray-700">Engage with your community</h2>
+              <p className="text-2xl text-gray-600 inline-flex items-center justify-center gap-2 whitespace-nowrap">
+                Search
+                <Select value={selectedCity} onValueChange={setSelectedCity}>
+                  <SelectTrigger className="mx-2 w-[120px] h-auto py-0.5 px-2 text-2xl text-gray-600 bg-transparent hover:bg-transparent focus:ring-0 inline-flex items-center border border-gray-200 rounded-md [&>svg]:ml-1 [&>svg]:border-l [&>svg]:border-gray-200 [&>svg]:pl-1">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="seattle">Seattle</SelectItem>
+                    <SelectItem value="coming-soon" disabled>
+                      More cities coming soon
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                City Council Records
+              </p>
+            </div>
           )}
           <SearchBox onSearch={handleSearch} />
         </motion.div>

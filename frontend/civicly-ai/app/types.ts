@@ -15,3 +15,4 @@ export interface SearchResponse {
   processing_time: number
 }
 
+export type City = "seattle" | "coming-soon"
