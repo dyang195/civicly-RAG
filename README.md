@@ -2,16 +2,12 @@
 
 A Visual Studio Code extension that provides AI-powered search and summarization for city council records, making local government more accessible and understandable. The platform uses semantic search and AI summarization to help citizens easily find and comprehend information from city council meetings.
 
----
-
 ## Features
 
 - **Semantic Search**: Vector-based search that understands context and meaning, not just keywords
 - **LLM Query Enhancement**: Automatically expands search queries with relevant government and policy terms
 - **Search Summarization**: Generates concise, temporal-aware summaries of search results
 - **City Council Records**: Currently supporting Seattle City Council records
-
----
 
 ## Technical Implementation
 
@@ -22,8 +18,6 @@ A Visual Studio Code extension that provides AI-powered search and summarization
 - **AI Integration**: OpenAI GPT-4o-mini for query enhancement and summarization
 - **Caching**: Redis for performance optimization
 - **Vector Embeddings**: MiniLM-L6-v2 model for semantic search embeddings
-
----
 
 ## Development
 
@@ -71,8 +65,6 @@ OPENAI_API_KEY=your_openai_key
 PINECONE_API_KEY=your_pinecone_key
 REDIS_URL=redis://localhost:6379
 ```
-
----
 
 ## Contributing
 
