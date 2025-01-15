@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
@@ -66,9 +66,16 @@ export default function Home() {
     }
   }
 
+  const resetPage = useCallback(() => {
+    setSearchPerformed(false)
+    setSearchResults(null)
+    setIsLoading(false)
+    setError(null)
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header onReset={resetPage} isLoading={isLoading} />
       <main className="p-4">
         <motion.div
           initial={{ y: searchPerformed ? -50 : 0 }}
@@ -103,7 +110,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3, delay: 0.5 }}
             className="mt-6 text-center"
           >
             <p className="text-xl text-gray-600">

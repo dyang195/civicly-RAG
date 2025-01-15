@@ -1,12 +1,19 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Header() {
+  const handleLogoClick = () => {
+    window.location.reload();
+  };
+
   return (
     <header className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="flex items-center">
+          <div 
+            onClick={handleLogoClick}
+            className="flex items-center group cursor-pointer"
+          >
           <Image
               src="/civicly-ai-logo.svg"
               alt="Civicly.ai Logo"
