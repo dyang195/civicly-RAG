@@ -1,6 +1,6 @@
 # Civicly.ai
 
-[Civicly.ai](civicly.ai) is a website that provides AI-powered search and summarization for city council records, making local government more accessible and understandable. The web application uses semantic search and AI summarization to help citizens easily find and comprehend information from city council meetings.
+[Civicly.ai](https://civicly.ai) is a website that provides AI-powered search and summarization for city council records, making local government more accessible and understandable. The web application uses semantic search and AI summarization to help citizens easily find and comprehend information from city council meetings.
 
 ## Features
 
@@ -11,11 +11,18 @@
 
 ## Technical Implementation
 
+### Frontend Architecture
+
+- **Framework**: Next.js (Node.js)- 
+- **Hosting**: Vercel
+- **UI**: React
+
 ### Backend Architecture
 
 - **Framework**: FastAPI
-- **Vector Datavase**: Pinecone vector database with sentence-transformers
-- **AI Integration**: OpenAI GPT-4o-mini for query enhancement and summarization
+- **Hosting**: Railway.app
+- **Vector Database**: Pinecone vector database with sentence-transformers
+- **LLM Provider**: OpenAI GPT-4o-mini for query enhancement and summarization
 - **Caching**: Redis for performance optimization
 - **Vector Embeddings**: MiniLM-L6-v2 model for semantic search embeddings
 
